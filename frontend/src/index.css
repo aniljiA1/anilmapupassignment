@@ -1,0 +1,13 @@
+@import "tailwindcss";
+body { font-family: Inter, Arial, sans-serif; margin: 0; background: #f6f8fb; color: #111; }
+.header { background: #0b57a4; color: white; padding: 1rem; }
+.main { display: flex; gap: 1rem; padding: 1rem; }
+.left { flex: 2; }
+.right { flex: 1; background: white; padding: 1rem; border-radius: 8px; }
+.metrics { display: flex; gap: 1rem; margin-bottom: 1rem; }
+.card { background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); flex: 1; }
+.charts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.map-section { margin-top: 1rem; background: white; padding: 0.5rem; border-radius: 8px; }
+.locations-panel input { display: block; width: 100%; margin: 6px 0; padding: 6px; }
+.locations-panel button { margin-top: 6px; padding: 6px 10px; }
+.footer { padding: 1rem; text-align:center; color: #666; }

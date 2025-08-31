@@ -1,0 +1,25 @@
+@import "tailwindcss";
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.header, .footer {
+  background: #111;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+.main {
+  flex: 1;
+  display: flex;
+}
+.left {
+  flex: 3;
+  padding: 1rem;
+}
+.right {
+  flex: 1;
+  border-left: 1px solid #ddd;
+  padding: 1rem;
+}

@@ -1,0 +1,37 @@
+Papa.parse(file, {
+  header: true,
+  skipEmptyLines: true,
+  complete: async (results) => {
+    // Transform CSV into objects
+    const data = results.data.map(r => ({
+      state: r.State,
+      year: Number(r["Model Year"]),
+      latitude: Number(r.Latitude),
+      longitude: Number(r.Longitude),
+      ev_type: r["Electric Vehicle Type"],
+      make: r.Make,
+      model: r.Model,
+    }));
+
+    // 🔹 Insert all rows in parallel
+    const inserted = await Promise.all(
+      data.map(async (row) => {
+        const res = await fetch("http://localhost:4000/locations", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(row),
+        });
+        return res.json(); // response has `_id`
+      })
+    );
+
+    // 🔹 Normalize Mongo `_id` into `id` for frontend (DataGrid needs `id`)
+    const normalized = inserted.map(item => ({
+      id: item._id,   // map Mongo _id to frontend id
+      ...item,
+    }));
+
+    // 🔹 Update state once (not inside loop)
+    setRows((prev) => [...prev, ...normalized]);
+  }
+});
